@@ -5,11 +5,17 @@ import buildspaceLogo from "../assets/buildspace-logo.png";
 
 const Home = () => {
   const [userInput, setUserInput] = useState("");
+  const [language, setLanguage] = useState("english");
 
   const [apiOutput, setApiOutput] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
 
   const callGenerateEndpoint = async () => {
+    if (!userInput) {
+      alert("Please enter a name");
+      return;
+    }
+
     setIsGenerating(true);
 
     console.log("Calling OpenAI...");
@@ -18,7 +24,7 @@ const Home = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ userInput }),
+      body: JSON.stringify({ userInput, language }),
     });
 
     const data = await response.json();
@@ -32,6 +38,11 @@ const Home = () => {
   const onUserChangedText = (event) => {
     console.log(event.target.value);
     setUserInput(event.target.value);
+  };
+
+  const onLanguageChange = (event) => {
+    console.log(event.target.value);
+    setLanguage(event.target.value);
   };
 
   return (
@@ -49,12 +60,25 @@ const Home = () => {
           </div>
         </div>
         <div className="prompt-container">
-          <input
-            placeholder="enter your guests name"
-            className="prompt-box"
-            value={userInput}
-            onChange={onUserChangedText}
-          />
+          <div className="prompt-line">
+            <div className="prompt-start">Review for</div>
+            <input
+              placeholder="guests name"
+              className="prompt-box"
+              value={userInput}
+              onChange={onUserChangedText}
+            />
+            in
+            <select
+              onChange={onLanguageChange}
+              value={language}
+              className="select-box"
+            >
+              <option>german</option>
+              <option>english</option>
+              <option>spanish</option>
+            </select>
+          </div>
           {/* New code I added here */}
           <div className="prompt-buttons">
             <a
@@ -78,7 +102,7 @@ const Home = () => {
           <div className="output">
             <div className="output-header-container">
               <div className="output-header">
-                <h3>Output</h3>
+                <h3>Review</h3>
               </div>
             </div>
             <div className="output-content">
