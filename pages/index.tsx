@@ -4,6 +4,7 @@ import { useState } from "react";
 import buildspaceLogo from "../assets/buildspace-logo.png";
 
 const Home = () => {
+  const [copyDone, setCopyDone] = useState(false);
   const [userInput, setUserInput] = useState("");
   const [language, setLanguage] = useState("english");
 
@@ -16,6 +17,7 @@ const Home = () => {
       return;
     }
 
+    setCopyDone(false);
     setIsGenerating(true);
 
     console.log("Calling OpenAI...");
@@ -45,18 +47,30 @@ const Home = () => {
     setLanguage(event.target.value);
   };
 
+  const copyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(apiOutput);
+      console.log("Content copied to clipboard");
+      setCopyDone(true);
+    } catch (err) {
+      console.error("Failed to copy: ", err);
+    }
+  };
+
   return (
     <div className="root">
       <Head>
-        <title>GPT-3 Writer | buildspace</title>
+        <title>
+          Guest Review Generator | Create unique reviews for your guests
+        </title>
       </Head>
       <div className="container">
         <div className="header">
           <div className="header-title">
-            <h1>Airbnb Review Generator</h1>
+            <h1>Guest Review Generator</h1>
           </div>
           <div className="header-subtitle">
-            <h2>create unique reviews for your guests</h2>
+            <h2>Create unique reviews for your guests</h2>
           </div>
         </div>
         <div className="prompt-container">
@@ -74,13 +88,15 @@ const Home = () => {
               value={language}
               className="select-box"
             >
-              <option>german</option>
-              <option>english</option>
-              <option>spanish</option>
+              <option value="english">🇬🇧 english</option>
+              <option value="german">🇩🇪 deutsch</option>
+              <option value="spanish">🇪🇸 spanish</option>
+              <option value="french">🇫🇷 french</option>
+              <option value="chinese">🇨🇳 chinese</option>
+              <option value="hindi">🇮🇳 hindi</option>
+              <option value="russian">🇨🇷 russian</option>
+              <option value="portuguese">🇨🇵 portuguese</option>
             </select>
-          </div>
-          {/* New code I added here */}
-          <div className="prompt-buttons">
             <a
               className={
                 isGenerating ? "generate-button loading" : "generate-button"
@@ -96,18 +112,36 @@ const Home = () => {
               </div>
             </a>
           </div>
+          {/* New code I added here */}
+          <div className="prompt-buttons"></div>
         </div>
 
-        {apiOutput && (
+        {!isGenerating && apiOutput && (
           <div className="output">
             <div className="output-header-container">
               <div className="output-header">
                 <h3>Review</h3>
               </div>
             </div>
+
             <div className="output-content">
               <p>{apiOutput}</p>
             </div>
+
+            <a
+              className="generate-button clipboard-button"
+              onClick={copyToClipboard}
+            >
+              <div className="generate">
+                {copyDone ? (
+                  <span>
+                    Done <span className="done-icon">✅</span>
+                  </span>
+                ) : (
+                  "Copy to 📋"
+                )}
+              </div>
+            </a>
           </div>
         )}
       </div>
