@@ -48,15 +48,17 @@ const Home = () => {
   return (
     <div className="root">
       <Head>
-        <title>GPT-3 Writer | buildspace</title>
+        <title>
+          Guest Review Generator | Create unique reviews for your guests
+        </title>
       </Head>
       <div className="container">
         <div className="header">
           <div className="header-title">
-            <h1>Airbnb Review Generator</h1>
+            <h1>Guest Review Generator</h1>
           </div>
           <div className="header-subtitle">
-            <h2>create unique reviews for your guests</h2>
+            <h2>Create unique reviews for your guests</h2>
           </div>
         </div>
         <div className="prompt-container">
