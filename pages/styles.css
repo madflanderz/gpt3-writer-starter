@@ -57,6 +57,10 @@ body {
     line-height: 1.2em;
     text-align: center;
     margin: 0;
+    background: #390099;
+    background: linear-gradient(to right, #390099 0%, #FF0054 50%, #ffbd00 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .header-subtitle h2 {
@@ -92,25 +96,21 @@ body {
     white-space: nowrap;
 }
 
-.prompt-box {
+.prompt-box, .select-box {
     border-bottom-width: 1px;
     border-color: rgba(255, 255, 255, 0.1);
     border-left-width: 1px;
     border-right-width: 1px;
     border-style: solid;
     border-top-width: 1px;
-    place-content: flex-start;
-    align-items: flex-start;
     background-color: rgba(255, 255, 255, 0.05);
     border-radius: 16px;
     display: flex;
-   
-    flex-flow: column nowrap;
     gap: 10px;
     flex-basis: 150px;
     flex-shrink: 0;
     overflow: hidden;
-    padding: 20px;
+    padding: 1rem;
     position: relative;
     
     will-change: transform;
@@ -125,50 +125,22 @@ body {
     color: rgba(255, 255, 255, 0.75);
     text-decoration: none;
     text-transform: none;
+    min-height: 4rem;
+    box-sizing: border-box;
 }
 
 .select-box {
-    border-bottom-width: 1px;
-    border-color: rgba(255, 255, 255, 0.1);
-    border-left-width: 1px;
-    border-right-width: 1px;
-    border-style: solid;
-    border-top-width: 1px;
-    place-content: flex-start;
-    align-items: flex-start;
-    background-color: rgba(255, 255, 255, 0.05);
-    border-radius: 16px;
-    display: flex;
-    flex: 0 0 auto;
-    flex-flow: column nowrap;
-    gap: 10px;
-    /* height: 150px; */
-    overflow: hidden;
-    padding: 20px;
-    position: relative;
-    /* width: 100px; */
-    max-width: 1200px;
-    will-change: transform;
-    overflow: auto;
-    outline: none;
-    resize: none;
-    font-size: 16px;
-    font-style: normal;
-    letter-spacing: 0px;
-    line-height: 1.6em;
-    text-align: start;
-    color: rgba(255, 255, 255, 0.75);
-    text-decoration: none;
-    text-transform: none;
+    padding-right: 1rem; 
 }
+
 
 textarea {
     font-family: 'Manrope', sans-serif;
 }
 
 
-.prompt-box:focus {
-    border-color:rgba(255, 255, 255, 0.75)
+.prompt-box:focus, .select-box:focus  {
+    border-color: #ff0054;
 }
 
 
@@ -221,9 +193,10 @@ textarea {
 .generate-button {
     place-content: flex-start;
     align-items: flex-start;
-    background-color: rgb(255, 79, 18);
+    background-color: #ff0054;
     border-radius: 100px;
     display: flex;
+    align-items: center;
     flex: 0 0 auto;
     flex-flow: column nowrap;
     gap: 10px;
@@ -235,6 +208,15 @@ textarea {
     width: min-content;
     will-change: transform;
     cursor: pointer;
+    font-weight: 600;
+    min-width: 120px;
+}
+
+.clipboard-button {
+    margin-top: 1rem;
+    background-color: #390099;
+    align-self: flex-end;
+    white-space: nowrap;
 }
 
 .generate {
@@ -367,12 +349,21 @@ textarea {
     justify-content: flex-start;
     flex-shrink: 0;
     transform: none;
+    border-radius: 10px;
+    border: 3px solid #ff0054;
+    padding: 2rem;
+    padding-top: 1rem;
 }
 
 .output-content p {
     text-align: center;
     white-space: pre-line;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+}
+
+.done-icon {
+    margin-left: 0.5rem;
 }
 
 @media (min-width: 810px) and (max-width: 1199px) {
