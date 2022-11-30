@@ -83,6 +83,9 @@ body {
     display: flex;
     gap: 20px;
     align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    min-width: 80vw;
 }
 
 .prompt-start {
@@ -104,8 +107,8 @@ body {
    
     flex-flow: column nowrap;
     gap: 10px;
-    /* height: 150px; */
     flex-basis: 150px;
+    flex-shrink: 0;
     overflow: hidden;
     padding: 20px;
     position: relative;

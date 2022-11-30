@@ -80,9 +80,7 @@ const Home = () => {
               <option>english</option>
               <option>spanish</option>
             </select>
-          </div>
-          {/* New code I added here */}
-          <div className="prompt-buttons">
+
             <a
               className={
                 isGenerating ? "generate-button loading" : "generate-button"
@@ -97,6 +95,11 @@ const Home = () => {
                 )}
               </div>
             </a>
+
+          </div>
+          {/* New code I added here */}
+          <div className="prompt-buttons">
+           
           </div>
         </div>
 
